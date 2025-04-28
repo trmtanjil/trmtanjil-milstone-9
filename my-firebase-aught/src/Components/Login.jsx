@@ -15,6 +15,7 @@ function Login() {
     signInWithPopup(auth, Provider)
       .then((result) => {
         console.log(result);
+     
         setUser(result.user)
       })
       .catch((error) => {
@@ -28,7 +29,17 @@ function Login() {
 
     signInWithPopup(augth,githubProvider)
     .then((result)=>{console.log(result)
-        setUser(result.user)
+      const logedinUser = result.user;
+
+      if(!logedinUser.email && logedinUser?.providerData?.length){
+        console.log('akhane email pawa jacchena ')
+        if(logedinUser.providerData[0].email){
+          logedinUser.email = logedinUser.logedinUser.providerData[0].email
+          setUser(logedinUser);
+        }
+      }
+
+        // setUser(result.user)
     })
     .catch((error)=>{console.log(error)})
   }
